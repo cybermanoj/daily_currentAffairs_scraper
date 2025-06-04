@@ -44,7 +44,7 @@ def generate_pdf_from_html(html_input_path, pdf_output_path):
         'enable-local-file-access': None, # ESSENTIAL
         'print-media-type': None,         # CRITICAL CHANGE: Set to None or OMIT
         'disable-smart-shrinking': None,  # Usually safe and good
-        'zoom': '1.1',                    # Usually safe
+        'zoom': '1.15',                    # Usually safe
         'load-error-handling': 'ignore',  # Usually safe
         'dpi': 300,
         'disable-smart-shrinking': True,

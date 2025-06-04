@@ -15,7 +15,8 @@ on:
 jobs:
   scrape_and_generate_report:
     runs-on: ubuntu-latest # Use a Linux environment provided by GitHub
-
+    permissions: 
+      contents: write   # This allows the GITHUB_TOKEN to push to the repository
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # Checks out your repository code
@@ -60,10 +61,7 @@ jobs:
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'actions-bot@users.noreply.github.com'
-          # Add all new/modified files in the output directories.
-          # If files were deleted by the script (e.g. old reports), git will see them as deletions.
           git add Output\ Pdf/\* Output\ Html/\* Output\ Images/\*
-          # Check if there are any changes (new files, modified files, or deleted files)
           if ! git diff --staged --quiet; then
             git commit -m "Automated daily report for $(date +'%Y-%m-%d')"
             git push

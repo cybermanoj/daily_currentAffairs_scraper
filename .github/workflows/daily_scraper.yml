@@ -1,0 +1,56 @@
+name: Daily CurrentAffairs Scraper
+
+on:
+  schedule:
+    # Attempt 1: 7:00 AM IST (1:30 AM UTC)
+    - cron: '30 1 * * *'
+    # Attempt 2: 8:00 AM IST (2:30 AM UTC)
+    - cron: '30 2 * * *'
+    # Attempt 3: 9:00 AM IST (3:30 AM UTC)
+    - cron: '30 3 * * *'
+    # Attempt 4: 10:00 AM IST (4:30 AM UTC)
+    - cron: '30 4 * * *'
+  workflow_dispatch: # Allows manual triggering from the Actions tab in GitHub
+
+jobs:
+  scrape_and_generate_report:
+    runs-on: ubuntu-latest # Use a Linux environment provided by GitHub
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Checks out your repository code
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' # You've updated this, good.
+
+      - name: Install wkhtmltopdf and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wkhtmltopdf xvfb libjpeg-turbo8 fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxrender1 libfontconfig1 libxext6
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run the scraper script
+        run: python main.py
+
+      - name: Upload PDF report as artifact
+        if: success() 
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-news-report-pdf
+          path: Output Pdf/*.pdf 
+          if-no-files-found: warn 
+
+      - name: Upload HTML report and images as artifact
+        if: success() 
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-news-report-html-images
+          path: |
+            Output Html/*
+            Output Images/*
+          if-no-files-found: warn
+      

@@ -1,0 +1,286 @@
+/* styles.css - Modern Aesthetic & PDF-Optimized */
+
+/* --- Global Resets & Base Styles --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px; /* Base for rem units */
+}
+
+body {
+    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    line-height: 1.65;
+    color: #333F48; /* Deep charcoal grey for text */
+    background-color: #F8F9FA; /* Very subtle light grey background - might be white in PDF */
+    padding: 20px; /* Padding around the content */
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', 'Georgia', 'Times New Roman', Times, serif;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    font-weight: 700; /* Bold for headings */
+}
+
+body > h1 { /* The main title "All Scraped Article Content" */
+    text-align: center;
+    font-size: 2.6rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #4CAF50; /* Accent green */
+    color: #212529; /* Strong, near-black for main title */
+    letter-spacing: -0.02em;
+}
+
+div.article-container h1#dynamic-title {
+    font-size: 2rem;
+    margin-top: 0; /* Reset for first element */
+    margin-bottom: 0.6rem;
+    line-height: 1.25;
+}
+
+div.article-container h1#dynamic-title a {
+    color: #2C3E50; /* Dark blue-grey for article titles */
+    text-decoration: none;
+}
+
+div.article-container h1#dynamic-title a:hover, /* Kept for consistency, but hover is PDF-irrelevant */
+div.article-container h1#dynamic-title a:focus {
+    color: #4CAF50; /* PDF might show base color or this if :focus is somehow active */
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 1.75rem;
+    color: #364F6B; /* Professional medium blue-grey for H2 */
+    border-bottom: 1px solid #E0E7EB;
+    padding-bottom: 0.5rem;
+    margin-top: 2.2rem;
+    margin-bottom: 1.1rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #4F6B8A; /* Slightly lighter blue-grey for H3 */
+    margin-top: 1.8rem;
+    margin-bottom: 0.9rem;
+}
+
+p {
+    margin-bottom: 1.1rem;
+    text-align: justify; /* Justified text */
+    font-size: 1rem; /* Standard paragraph size */
+}
+
+p strong, p b {
+    font-weight: 600;
+    color: #2A3642; /* Slightly darker for emphasis */
+}
+
+a {
+    color: #2196F3; /* Bright, standard blue for links */
+    text-decoration: none; /* No underline by default */
+    font-weight: 500;
+    padding: 2px 0;
+}
+
+a:hover, a:focus { /* Kept for consistency, but hover is PDF-irrelevant */
+    color: #1976D2;
+    text-decoration: underline;
+}
+
+/* Hide arrow for external links if browser adds one by default */
+a[target="_blank"]::after {
+    content: ""; /* This should be fine for PDFKit */
+}
+
+/* --- Article Structure --- */
+.article-container {
+    background-color: #FFFFFF; /* White background for articles */
+    padding: 30px 35px;
+    margin-bottom: 30px;
+    border-radius: 10px; /* May or may not render perfectly in PDF */
+    /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); */ /* Shadows are often problematic in PDF */
+    page-break-inside: avoid; /* Hint for PDF */
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #DAE1E7; /* Solid color for PDF instead of gradient */
+    margin: 50px 0;
+}
+
+/* --- Star Rating --- */
+.starRating {
+    margin-bottom: 1.2rem;
+    font-size: 1.8rem;
+}
+
+.star-checked {
+    color: #FFB300; /* Warm gold */
+}
+
+.star-unchecked {
+    color: #CED4DA; /* Muted light grey */
+}
+
+/* --- Bordered Background Sections (e.g., For Prelims/Mains, Notes, PYQ) --- */
+.border-bg {
+    background-color: #F3F6F9; /* Very light cool grey */
+    border: 1px solid #E4EBF2;
+    padding: 20px 25px;
+    margin-top: 1.8rem;
+    margin-bottom: 2.2rem;
+    border-radius: 8px; /* May or may not render perfectly in PDF */
+    page-break-inside: avoid; /* Hint */
+}
+
+.border-bg h3 {
+    margin-top: 0;
+    color: #3F5C7D; /* Heading color within border-bg */
+    font-size: 1.3rem;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.border-bg p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    text-align: left; /* Left-aligned text in these blocks */
+    margin-bottom: 0.7rem;
+}
+.border-bg p:last-child {
+    margin-bottom: 0;
+}
+
+.border-bg p a {
+    color: #1a0dab; /* Google-like blue for distinct links in these sections */
+    /* text-decoration: underline; */ /* Optionally underline these links */
+}
+/* .border-bg p a:hover - will inherit general a:hover */
+
+.border-bg ul, .border-bg ol {
+    margin-left: 18px;
+    padding-left: 0;
+    font-size: 0.9rem;
+}
+.border-bg ul li, .border-bg ol li {
+    margin-bottom: 0.35rem;
+}
+.border-bg ul ul, .border-bg ol ol {
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+}
+
+/* --- Lists --- */
+ul, ol {
+    margin-bottom: 1.1rem;
+    padding-left: 22px;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+ul ul, ol ol, ul ol, ol ul { /* Nested lists */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 18px;
+}
+
+/* --- Tables --- */
+table {
+    width: 100%;
+    border-collapse: separate; /* Allows border-radius attempt */
+    border-spacing: 0;
+    margin-bottom: 2.2rem;
+    font-size: 0.9rem;
+    page-break-inside: avoid; /* Hint */
+    border: 1px solid #DEE2E6;
+    border-radius: 6px; /* May or may not render perfectly in PDF */
+    overflow: hidden; /* For border-radius clipping, may not be fully supported */
+}
+
+th, td {
+    border-bottom: 1px solid #E9ECEF;
+    border-right: 1px solid #E9ECEF;
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: top;
+}
+th:last-child, td:last-child {
+    border-right: none;
+}
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+th {
+    background-color: #F1F3F5; /* Light header background */
+    font-weight: 600;
+    color: #495057;
+    border-bottom-width: 2px;
+}
+
+tbody tr:nth-child(even) { /* Subtle banding */
+    background-color: #FAFAFA;
+}
+/* tbody tr:hover - hover is PDF-irrelevant */
+
+table tbody tr td p:first-child {
+    margin-bottom: 0.5rem;
+}
+table tbody tr td p:first-child span em span b {
+    color: #364F6B;
+    font-size: 1.05em;
+}
+
+/* --- Images --- */
+img.content-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2.2rem auto;
+    border: none;
+    padding: 0;
+    border-radius: 6px; /* May or may not render perfectly in PDF */
+    background-color: #fff;
+    /* box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05); */ /* Shadow removed */
+    object-fit: contain;
+}
+
+/* --- YouTube Links --- */
+p a[href*="youtube.com/embed"] {
+    display: inline-block; /* Changed from inline-flex for better PDF compatibility */
+    /* align-items: center; */ /* Less critical with inline-block if content is simple */
+    /* gap: 0.4em; */ /* Gap might not be supported, adjust padding if needed */
+    background-color: #FF0000; /* YouTube red */
+    color: #FFFFFF !important; /* White text, important to override general 'a' color */
+    padding: 0.5rem 1rem;
+    border-radius: 5px; /* May or may not render */
+    font-weight: 600;
+    text-decoration: none;
+    /* box-shadow: 0 3px 6px rgba(0,0,0,0.15); */ /* Shadow removed */
+    font-size: 0.9rem;
+    vertical-align: middle; /* Helps align with text if needed */
+}
+
+/* p a[href*="youtube.com/embed"]:hover - hover is PDF-irrelevant */
+
+p a[href*="youtube.com/embed"]::before {
+    content: "▶";
+    font-size: 0.9em;
+    line-height: 1;
+    margin-right: 0.4em; /* Replaces gap */
+}
+
+

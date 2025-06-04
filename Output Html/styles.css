@@ -10,7 +10,7 @@
 }
 
 html {
-    font-size: 16px; /* Base for rem units */
+    font-size: 18px; /* MODIFIED: Increased from 16px to 18px for larger base text */
 }
 
 body {
@@ -25,13 +25,13 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', 'Georgia', 'Times New Roman', Times, serif;
     line-height: 1.3;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; /* This will now be relative to 18px */
     font-weight: 700; /* Bold for headings */
 }
 
 body > h1 { /* The main title "All Scraped Article Content" */
     text-align: center;
-    font-size: 2.6rem;
+    font-size: 2.6rem; /* This will now be 2.6 * 18px */
     margin-bottom: 2.5rem;
     padding-bottom: 1rem;
     border-bottom: 3px solid #4CAF50; /* Accent green */
@@ -40,7 +40,7 @@ body > h1 { /* The main title "All Scraped Article Content" */
 }
 
 div.article-container h1#dynamic-title {
-    font-size: 2rem;
+    font-size: 2rem; /* This will now be 2 * 18px */
     margin-top: 0; /* Reset for first element */
     margin-bottom: 0.6rem;
     line-height: 1.25;
@@ -58,7 +58,7 @@ div.article-container h1#dynamic-title a:focus {
 }
 
 h2 {
-    font-size: 1.75rem;
+    font-size: 1.75rem; /* This will now be 1.75 * 18px */
     color: #364F6B; /* Professional medium blue-grey for H2 */
     border-bottom: 1px solid #E0E7EB;
     padding-bottom: 0.5rem;
@@ -67,7 +67,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* This will now be 1.5 * 18px */
     color: #4F6B8A; /* Slightly lighter blue-grey for H3 */
     margin-top: 1.8rem;
     margin-bottom: 0.9rem;
@@ -76,7 +76,7 @@ h3 {
 p {
     margin-bottom: 1.1rem;
     text-align: justify; /* Justified text */
-    font-size: 1rem; /* Standard paragraph size */
+    font-size: 1rem; /* This will now be 1 * 18px (i.e., 18px) */
 }
 
 p strong, p b {
@@ -89,6 +89,8 @@ a {
     text-decoration: none; /* No underline by default */
     font-weight: 500;
     padding: 2px 0;
+    /* If links also need to be scaled with rem, you might consider: */
+    /* font-size: 0.95rem; /* or 1rem if they should match paragraph text */
 }
 
 a:hover, a:focus { /* Kept for consistency, but hover is PDF-irrelevant */
@@ -121,7 +123,7 @@ hr {
 /* --- Star Rating --- */
 .starRating {
     margin-bottom: 1.2rem;
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* This will now be 1.8 * 18px */
 }
 
 .star-checked {
@@ -146,13 +148,13 @@ hr {
 .border-bg h3 {
     margin-top: 0;
     color: #3F5C7D; /* Heading color within border-bg */
-    font-size: 1.3rem;
+    font-size: 1.3rem; /* This will now be 1.3 * 18px */
     border-bottom: none;
     padding-bottom: 0;
 }
 
 .border-bg p {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* This will now be 0.9 * 18px */
     line-height: 1.55;
     text-align: left; /* Left-aligned text in these blocks */
     margin-bottom: 0.7rem;
@@ -164,13 +166,14 @@ hr {
 .border-bg p a {
     color: #1a0dab; /* Google-like blue for distinct links in these sections */
     /* text-decoration: underline; */ /* Optionally underline these links */
+    /* font-size: 1em; /* Inherit from parent .border-bg p if not specified before */
 }
 /* .border-bg p a:hover - will inherit general a:hover */
 
 .border-bg ul, .border-bg ol {
     margin-left: 18px;
     padding-left: 0;
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* This will now be 0.9 * 18px */
 }
 .border-bg ul li, .border-bg ol li {
     margin-bottom: 0.35rem;
@@ -188,7 +191,7 @@ ul, ol {
 
 li {
     margin-bottom: 0.5rem;
-    font-size: 0.95rem;
+    font-size: 0.95rem; /* This will now be 0.95 * 18px */
 }
 
 ul ul, ol ol, ul ol, ol ul { /* Nested lists */
@@ -203,7 +206,7 @@ table {
     border-collapse: separate; /* Allows border-radius attempt */
     border-spacing: 0;
     margin-bottom: 2.2rem;
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* This will now be 0.9 * 18px */
     page-break-inside: avoid; /* Hint */
     border: 1px solid #DEE2E6;
     border-radius: 6px; /* May or may not render perfectly in PDF */
@@ -241,7 +244,7 @@ table tbody tr td p:first-child {
 }
 table tbody tr td p:first-child span em span b {
     color: #364F6B;
-    font-size: 1.05em;
+    font-size: 1.05em; /* This is relative to parent cell's font-size, so it will also scale */
 }
 
 /* --- Images --- */
@@ -249,7 +252,7 @@ img.content-img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 2.2rem auto;
+    margin: 2.2rem auto; /* This will now be relative to 18px */
     border: none;
     padding: 0;
     border-radius: 6px; /* May or may not render perfectly in PDF */
@@ -260,27 +263,20 @@ img.content-img {
 
 /* --- YouTube Links --- */
 p a[href*="youtube.com/embed"] {
-    display: inline-block; /* Changed from inline-flex for better PDF compatibility */
-    /* align-items: center; */ /* Less critical with inline-block if content is simple */
-    /* gap: 0.4em; */ /* Gap might not be supported, adjust padding if needed */
-    background-color: #FF0000; /* YouTube red */
-    color: #FFFFFF !important; /* White text, important to override general 'a' color */
-    padding: 0.5rem 1rem;
-    border-radius: 5px; /* May or may not render */
+    display: inline-block; 
+    background-color: #FF0000; 
+    color: #FFFFFF !important; 
+    padding: 0.5rem 1rem; /* This will now be relative to 18px (if parent is html) or parent p's font-size */
+    border-radius: 5px; 
     font-weight: 600;
     text-decoration: none;
-    /* box-shadow: 0 3px 6px rgba(0,0,0,0.15); */ /* Shadow removed */
-    font-size: 0.9rem;
-    vertical-align: middle; /* Helps align with text if needed */
+    font-size: 0.9rem; /* This will now be 0.9 * 18px (if parent is html) or relative to parent p's font-size */
+    vertical-align: middle; 
 }
-
-/* p a[href*="youtube.com/embed"]:hover - hover is PDF-irrelevant */
 
 p a[href*="youtube.com/embed"]::before {
     content: "▶";
-    font-size: 0.9em;
+    font-size: 0.9em; /* Relative to the a tag's font-size */
     line-height: 1;
     margin-right: 0.4em; /* Replaces gap */
 }
-
-

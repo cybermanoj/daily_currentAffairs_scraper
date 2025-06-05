@@ -22,7 +22,7 @@ def get_daily_url():
     """"Generates the URL for the current day's news analysis"""
     today = datetime.now()
     date_str = today.strftime("%d-%m-%Y")
-    return f"{API_BASE_URL}03-06-2025"
+    return f"{API_BASE_URL}04-06-2025"
 
 def fetch_page_content(url):
     try:
